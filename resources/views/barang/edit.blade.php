@@ -3,13 +3,13 @@
 <div class="row">
 	<div class="container">
 		<div class="col-md-11">
-			<div class="panel panel-primary">
-			  <div class="panel-heading">Edit Data Post 
+			<div class="panel panel-info">
+			  <div class="panel-heading">Edit Data Barang 
 			  	<div class="panel-title pull-right"><a href="{{ url()->previous() }}">Kembali</a>
 			  	</div>
 			  </div>
 			  <div class="panel-body">
-			  	<form action="{{ route('barang.update',$a->id) }}" method="post" >
+			  	<form action="{{ route('barang.update',$a->id) }}" method="post" enctype="multipart/form-data" >
 			  		<input name="_method" type="hidden" value="PATCH">
         			{{ csrf_field() }}
 			  		<div class="form-group {{ $errors->has('nama') ? ' has-error' : '' }}">
@@ -31,6 +31,17 @@
                             </span>
                         @endif
 			  		</div>
+
+			  		 <div class="form-group">
+                                <label for="cc-payment" class="control-label mb-1">Foto</label>
+                                @if (isset($a) && $a->foto)
+                                    <p>
+                                        <br>
+                                    <img src="{{ asset('assets/img/foto/'.$a->foto) }}" style="max-height:125px;max-width:125px;margin-top:7px; alt=">
+                                    </p>
+                                @endif
+                                <input name="foto" type="file" value="{{ $a->foto }}">
+                            </div>
 
 
 			  		<div class="form-group">

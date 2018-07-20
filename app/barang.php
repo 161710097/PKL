@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\peminjam;
 class barang extends Model
 {
     protected $table = 'barangs';
@@ -13,5 +13,10 @@ class barang extends Model
      public function stock()
 	{
 		return $this->hasMany('App\stock');
+	}
+
+	public function peminjam()
+	{
+		return $this->hasMany('App\peminjam');
 	}
 }

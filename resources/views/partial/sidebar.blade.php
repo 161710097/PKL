@@ -8,7 +8,7 @@
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name }}</p>
-          <a href="{{ Auth::user()->name }}"><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="home"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
       <!-- search form -->
@@ -28,7 +28,7 @@
         <li class="header">MENU</li>
         
         <li>
-          <a href="home">
+          <a href="/home">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               
@@ -37,17 +37,17 @@
          
         </li>
         <li>
-          <a href="barang">
-            <i class="fa fa-th"></i> <span>Barang</span>
+          <a href="/barang">
+            <i class="fa fa-laptop"></i> <span>Barang</span>
           </a>
         </li>
+        <li><a href="/peminjam"><i class="fa fa-book"></i> <span>Peminjaman</span></a></li>
         <li>
-          <a href="pages/calendar.html">
+          <a href="#">
             <i class="fa fa-user-circle-o"></i> <span>Member</span>
           </a>
         </li>
        
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Peminjam</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>

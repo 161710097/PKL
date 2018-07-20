@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\stock;
 use App\barang;
+use App\peminjam;
 
 class User extends Authenticatable
 {
@@ -32,5 +33,10 @@ class User extends Authenticatable
     public function stock()
     {
         return $this->hasMany('App\stock');
+    }
+
+    public function peminjam()
+    {
+        return $this->hasMany('App\peminjam');
     }
 }

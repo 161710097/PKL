@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\barang;
 use App\stock;
+use File;
 use Session;
 use Illuminate\Http\Request;
 
@@ -18,47 +19,6 @@ class BarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function borrow($id)
-    {
-        try {
-            $barang = barang::findOrFail($id);
-            Auth::user()->borrow($barang);
-            Session::flash("flash_notification", [
-            "level"=>"success",
-            "message"=>"Berhasil meminjam $barang->title"
-            ]);
-        }   catch (barangException $e) {
-            Session::flash("flash_notification", [
-            "level" => "danger",
-            "message" => $e->getMessage()
-            ]);
-            } 
-            catch (ModelNotFoundException $e) {
-            Session::flash("flash_notification", [
-            "level"=>"danger",
-            "message"=>"Barang tidak ditemukan."
-            ]);
-        }
-        return redirect('/');
-    }
-
-    public function returnBack($barang_id)
-    {
-        $borrowLog = BorrowLog::where('user_id', Auth::user()->id)
-                                ->where('barang_id', $barang_id)
-                                ->where('is_returned', 0)
-                                ->first();
-        if ($borrowLog) {
-            $borrowLog->is_returned = true;
-            $borrowLog->save();
-            Session::flash("flash_notification", [
-            "level" => "success",
-            "message" => "Berhasil mengembalikan " . $borrowLog->barang->title
-            ]);
-        }
-        return redirect('/home');
-    }
 
     public function index()
     {
@@ -87,12 +47,21 @@ class BarangController extends Controller
          $this->validate($request,[
             'nama' => 'required|',
             'jumlah' => 'required|'
+            
+            
         ]);
         $a = new barang;
         $a->nama = $request->nama;
         $a->jumlah = $request->jumlah;
+        //upload foto
+         if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $destinationPath = public_path().'/assets/img/foto/';
+            $filename = str_random(6).'_'.$file->getClientOriginalName();
+            $uploadSuccess = $file->move($destinationPath, $filename);
+            $a->foto = $filename;
+            }
         $a->save();
-        
         ;
         return redirect()->route('barang.index');
     }
@@ -136,8 +105,28 @@ class BarangController extends Controller
         $a = barang::findOrFail($id);
         $a->nama = $request->nama;
         $a->jumlah = $request->jumlah;
+        // edit upload foto
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $destinationPath = public_path().'/assets/img/foto/';
+            $filename = str_random(6).'_'.$file->getClientOriginalName();
+            $uploadSuccess = $file->move($destinationPath, $filename);
+    
+        // hapus foto lama, jika ada
+        if ($a->foto) {
+        $old_foto = $a->foto;
+        $filepath = public_path() . DIRECTORY_SEPARATOR . '/assets/img/foto'
+        . DIRECTORY_SEPARATOR . $a->foto;
+            try {
+            File::delete($filepath);
+            } catch (FileNotFoundException $e) {
+        // File sudah dihapus/tidak ada
+            }
+        }
+        $a->foto = $filename;
+}
         $a->save();
-        ;
+        
         return redirect()->route('barang.index');
     }
 
@@ -151,6 +140,18 @@ class BarangController extends Controller
     {
         $a = barang::findOrFail($id);
         $a->delete();
+        if ($a->foto) {
+            $old_foto = $a->foto;
+            $filepath = public_path() . DIRECTORY_SEPARATOR . 'assets/img/foto/'
+            . DIRECTORY_SEPARATOR . $a->foto;
+            try {
+            File::delete($filepath);
+            } catch (FileNotFoundException $e) {
+            // File sudah dihapus/tidak ada
+            }
+            }
+            $a->delete();
+
         Session::flash("flash_notification", [
         "level"=>"success",
         "message"=>"Barang berhasil dihapus"

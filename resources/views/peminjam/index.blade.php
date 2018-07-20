@@ -4,8 +4,8 @@
 	<div class="container">
 		<div class="col-md-11">
 			<div class="panel panel-info">
-			  <div class="panel-heading">Data Barang
-			  	<div class="panel-title pull-right"><a href="{{ route('barang.create') }}">Tambah</a>
+			  <div class="panel-heading">Data Peminjam
+			  	<div class="panel-title pull-right"><a href="{{ route('peminjam.create') }}">Tambah</a>
 			  	</div>
 			  </div>
 			  <div class="panel-body">
@@ -14,9 +14,9 @@
 				  	<thead>
 			  		<tr>
 			  		  <th>No</th>
+					  <th>Nama Member</th>
 					  <th>Nama Barang</th>
-					  <th>Jumlah</th>
-					  <th>Gambar</th>
+					  <th>Jumlah pinjam</th>
 					  <th colspan="2">Action</th>
 			  		</tr>
 				  	</thead>
@@ -26,17 +26,16 @@
 				  		@foreach($a as $data)
 				  	  <tr>
 				    	<td>{{ $no++ }}</td>
-				    	<td>{{ $data->nama }}</td>
-				    	<td><p>{{ $data->jumlah }}</p></td>
-				    	<td><img src="{{ asset('assets/img/foto/'.$data->foto)  }}" style="max-height:125px;max-width:125px;margin-top:7px;"></td>
-
-
+				    	<td>{{ $data->User->name }}</td>
+				    	<td>{{ $data->barang->nama }}</td>
+				    	<td>{{ $data->jumlah_pinjam }}</td>
+				    	
 				    	
 <td>
-	<a class="btn btn-warning" href="{{ route('barang.edit',$data->id) }}">Edit</a>
+	<a class="btn btn-warning" href="{{ route('peminjam.edit',$data->id) }}">Edit</a>
 </td>
 <td>
-	<form method="post" action="{{ route('barang.destroy',$data->id) }}">
+	<form method="post" action="{{ route('peminjam.destroy',$data->id) }}">
 		<input name="_token" type="hidden" value="{{ csrf_token() }}">
 		<input type="hidden" name="_method" value="DELETE">
 
