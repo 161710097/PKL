@@ -47,6 +47,7 @@
                                 <strong>{{ $errors->first('jumlah_pinjam') }}</strong>
                             </span>
                         @endif
+                    </div>
 			  		<div class="form-group">
 			  			<button type="submit" class="btn btn-primary">Tambah</button>
 			  		</div>

@@ -31,6 +31,17 @@
                         @endif
 			  		</div>
 
+			  		<div class="form-group {{ $errors->has('kondisi') ? ' has-error' : '' }}">
+			  			<label class="control-label">Kondisi Barang</label>	<br>
+			  			<input type="radio" name="kondisi" value="Rusak" required>Rusak 
+			  			<input type="radio" name="kondisi" value="Bagus" required>Bagus
+			  			@if ($errors->has('kondisi'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('kondisi') }}</strong>
+                            </span>
+                        @endif
+			  		</div>
+
 			  		<div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Gambar</label>
                                 <input name="foto" type="file" required>

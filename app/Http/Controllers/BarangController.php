@@ -46,13 +46,16 @@ class BarangController extends Controller
     {
          $this->validate($request,[
             'nama' => 'required|',
-            'jumlah' => 'required|'
+            'jumlah' => 'required|',
+            'kondisi' => 'required|'
             
             
         ]);
         $a = new barang;
         $a->nama = $request->nama;
         $a->jumlah = $request->jumlah;
+        $a->kondisi = $request->kondisi;
+
         //upload foto
          if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -100,11 +103,13 @@ class BarangController extends Controller
     {
         $this->validate($request,[
             'nama' => 'required|',
-            'jumlah' => 'required|'
+            'jumlah' => 'required|',
+            'kondisi' => 'required|'
         ]);
         $a = barang::findOrFail($id);
         $a->nama = $request->nama;
         $a->jumlah = $request->jumlah;
+        $a->kondisi = $request->kondisi;
         // edit upload foto
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');

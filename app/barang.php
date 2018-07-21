@@ -7,7 +7,7 @@ use App\peminjam;
 class barang extends Model
 {
     protected $table = 'barangs';
-    protected $fillable =['nama','jumlah','stock','kondisi'];
+    protected $fillable =['nama','jumlah','kondisi','foto'];
     public $timestamps = true;
 
      public function stock()

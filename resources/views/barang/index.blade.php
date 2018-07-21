@@ -16,6 +16,7 @@
 			  		  <th>No</th>
 					  <th>Nama Barang</th>
 					  <th>Jumlah</th>
+					  <th>Kondisi Barang</th>
 					  <th>Gambar</th>
 					  <th colspan="2">Action</th>
 			  		</tr>
@@ -28,6 +29,7 @@
 				    	<td>{{ $no++ }}</td>
 				    	<td>{{ $data->nama }}</td>
 				    	<td><p>{{ $data->jumlah }}</p></td>
+				    	<td>{{ $data->kondisi }}</td>
 				    	<td><img src="{{ asset('assets/img/foto/'.$data->foto)  }}" style="max-height:125px;max-width:125px;margin-top:7px;"></td>
 
 

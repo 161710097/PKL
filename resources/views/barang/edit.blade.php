@@ -32,12 +32,23 @@
                         @endif
 			  		</div>
 
+			  		<div class="form-group {{ $errors->has('kondisi') ? ' has-error' : '' }}">
+			  			<label class="control-label">Kondisi Barang</label>	<br>
+			  			<input type="radio" name="kondisi" value="Rusak">Rusak 
+			  			<input type="radio" name="kondisi" value="Bagus">Bagus 
+			  			@if ($errors->has('kondisi'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('kondisi') }}</strong>
+                            </span>
+                        @endif
+			  		</div>
+
 			  		 <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Foto</label>
                                 @if (isset($a) && $a->foto)
                                     <p>
                                         <br>
-                                    <img src="{{ asset('assets/img/foto/'.$a->foto) }}" style="max-height:125px;max-width:125px;margin-top:7px; alt=">
+                                    <img src="{{ asset('assets/img/foto/'.$a->foto) }}" style="max-height:125px;max-width:125px;margin-top:7px; ">
                                     </p>
                                 @endif
                                 <input name="foto" type="file" value="{{ $a->foto }}">
