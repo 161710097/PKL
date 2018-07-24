@@ -65,7 +65,10 @@ class BarangController extends Controller
             $a->foto = $filename;
             }
         $a->save();
-        ;
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Barang berhasil ditambahkan"
+        ]);
         return redirect()->route('barang.index');
     }
 
@@ -131,6 +134,10 @@ class BarangController extends Controller
         $a->foto = $filename;
 }
         $a->save();
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Barang berhasil diUbah"
+        ]);
         
         return redirect()->route('barang.index');
     }
@@ -156,7 +163,7 @@ class BarangController extends Controller
             }
             }
             $a->delete();
-
+            
         Session::flash("flash_notification", [
         "level"=>"success",
         "message"=>"Barang berhasil dihapus"

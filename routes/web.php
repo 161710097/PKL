@@ -18,7 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::resource('barang','BarangController');
-Route::resource('peminjam','PeminjamController');
+Route::group(['prefix'=>'admin','middleware'=>['auth','role:admin']],
+function (){
+	
+	Route::resource('peminjam','PeminjamController');
+	Route::resource('member','UserController');
+
+});
 

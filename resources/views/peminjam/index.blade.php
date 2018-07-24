@@ -3,6 +3,26 @@
 <div class="row">
 	<div class="container">
 		<div class="col-md-11">
+			<div>
+			 <section class="content-header">
+      			<h1>
+        			Dashboard
+        		<small>Control panel</small>
+      			</h1>
+     				<ol class="breadcrumb">
+      					 <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+       					 <li class="active">Peminjam</li>
+     				 </ol>
+    						</section>
+    						</div>
+    					@if (session()->has('flash_notification.message'))
+			<div class="panel-heading-info">
+					<div class="alert alert-{{ session()->get('flash_notification.level') }}">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					{!! session()->get('flash_notification.message') !!}
+					</div>
+			</div>
+				@endif
 			<div class="panel panel-info">
 			  <div class="panel-heading">Data Peminjam
 			  	<div class="panel-title pull-right"><a href="{{ route('peminjam.create') }}">Tambah</a>

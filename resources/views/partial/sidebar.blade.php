@@ -37,15 +37,18 @@
          
         </li>
         <li>
+          @role(['admin','member'])
           <a href="/barang">
             <i class="fa fa-laptop"></i> <span>Barang</span>
-          </a>
+          </a>@endrole
         </li>
-        <li><a href="/peminjam"><i class="fa fa-book"></i> <span>Peminjaman</span></a></li>
+        <li>@role(['admin'])<a href="{{ route('peminjam.index') }}"><i class="fa fa-book"></i> <span>Peminjaman</span></a>@endrole</li>
         <li>
-          <a href="#">
+          @role(['admin'])
+          <a href="{{ route('member.index') }}">
             <i class="fa fa-user-circle-o"></i> <span>Member</span>
           </a>
+          @endrole
         </li>
        
         <li class="header">LABELS</li>

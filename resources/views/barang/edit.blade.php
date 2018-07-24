@@ -3,6 +3,18 @@
 <div class="row">
 	<div class="container">
 		<div class="col-md-11">
+			<div>
+			 <section class="content-header">
+      			<h1>
+        			Dashboard
+        		<small>Control panel</small>
+      			</h1>
+     				<ol class="breadcrumb">
+      					 <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+       					 <li class="active">Barang</li>
+     				 </ol>
+    						</section>
+    						</div>
 			<div class="panel panel-info">
 			  <div class="panel-heading">Edit Data Barang 
 			  	<div class="panel-title pull-right"><a href="{{ url()->previous() }}">Kembali</a>
@@ -24,7 +36,7 @@
 
 			  		<div class="form-group {{ $errors->has('jumlah') ? ' has-error' : '' }}">
 			  			<label class="control-label">Jumlah</label>	
-			  			<input type="text" name="jumlah" class="form-control" value="{{ $a->jumlah }}"  required>
+			  			<input type="number" name="jumlah" class="form-control" value="{{ $a->jumlah }}"  required>
 			  			@if ($errors->has('jumlah'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('jumlah') }}</strong>
